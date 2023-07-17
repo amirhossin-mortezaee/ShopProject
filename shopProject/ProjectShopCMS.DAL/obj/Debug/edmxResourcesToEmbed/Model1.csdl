@@ -3,18 +3,13 @@
   <EntityType Name="Slider">
     <Key>
       <PropertyRef Name="SliderId" />
-      <PropertyRef Name="Title" />
-      <PropertyRef Name="ImageName" />
-      <PropertyRef Name="StartSliderDate" />
-      <PropertyRef Name="EndSliderDate" />
-      <PropertyRef Name="IsActive" />
     </Key>
     <Property Name="SliderId" Type="Int32" Nullable="false" />
     <Property Name="DiscountTitle" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="ImageName" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="StartSliderDate" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="EndSliderDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="StartSliderDate" Type="DateTime" Nullable="false" Precision="7" />
+    <Property Name="EndSliderDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="IsActive" Type="Boolean" Nullable="false" />
   </EntityType>
   <EntityContainer Name="projectShopDBEntities" annotation:LazyLoadingEnabled="true">
