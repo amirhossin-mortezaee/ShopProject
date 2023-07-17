@@ -93,9 +93,9 @@ namespace shopProject.Areas.Admin.Controllers
             {
                 if(ImageUpload != null)
                 {
-                    System.IO.File.Delete(Server.MapPath("/Images/Slider") + slider.ImageName);
+                    System.IO.File.Delete(Server.MapPath("/Images/Slider/") + slider.ImageName);
                     slider.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(ImageUpload.FileName);
-                    ImageUpload.SaveAs(Server.MapPath("/Images/slider" + slider.ImageName));
+                    ImageUpload.SaveAs(Server.MapPath("/Images/Slider/" + slider.ImageName));
                 }
                 db.Entry(slider).State = EntityState.Modified;
                 db.SaveChanges();
@@ -125,7 +125,7 @@ namespace shopProject.Areas.Admin.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Slider slider = db.Slider.Find(id);
-            System.IO.File.Delete(Server.MapPath("/Images/Slider") + slider.ImageName);
+            System.IO.File.Delete(Server.MapPath("/Images/Slider/") + slider.ImageName);
             db.Slider.Remove(slider);
             db.SaveChanges();
             return RedirectToAction("Index");
