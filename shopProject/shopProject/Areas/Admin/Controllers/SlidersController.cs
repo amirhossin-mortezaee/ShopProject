@@ -57,7 +57,7 @@ namespace shopProject.Areas.Admin.Controllers
                     return View(slider);
                 }
                 slider.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(ImageUpload.FileName);
-                ImageUpload.SaveAs(Server.MapPath("/Images/slider" + slider.ImageName));
+                ImageUpload.SaveAs(Server.MapPath("/Images/Slider/"+slider.ImageName));
                 
                 db.Slider.Add(slider);
                 db.SaveChanges();
