@@ -6,6 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="c39e0adfea8041d588a9e436d71cc551" Name="Diagram1">
         <EntityTypeShape EntityType="projectShopDBModel.Slider" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectShopDBModel.Roles" Width="1.5" PointX="3.375" PointY="1.5" />
+        <EntityTypeShape EntityType="projectShopDBModel.User" Width="1.5" PointX="5.625" PointY="1" />
+        <AssociationConnector Association="projectShopDBModel.FK_User_Roles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -10,3 +10,15 @@ C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\shopProje
 C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\shopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.csproj.CopyComplete
 C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\shopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.dll
 C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\shopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.pdb
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\ProjectShopCMS.DAL.dll.config
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\ProjectShopCMS.DAL.dll
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\ProjectShopCMS.DAL.pdb
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\EntityFramework.dll
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\EntityFramework.xml
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.csproj.AssemblyReference.cache
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.csproj.CoreCompileInputs.cache
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.csproj.CopyComplete
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.dll
+C:\Users\amirhossin\Desktop\دوره پیشرفته MVc\01\ShopProject\ProjectShopCMS.DAL\obj\Debug\ProjectShopCMS.DAL.pdb
