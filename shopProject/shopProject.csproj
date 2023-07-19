@@ -8918,6 +8918,7 @@
     <Compile Include="Tools\PartialToString.cs" />
     <Compile Include="Tools\PersianDateTime.cs" />
     <Compile Include="Tools\PersianDayOfWeek.cs" />
+    <Compile Include="Tools\ProjectRoleProvider.cs" />
     <Compile Include="Tools\SendEmail.cs" />
   </ItemGroup>
   <ItemGroup>
