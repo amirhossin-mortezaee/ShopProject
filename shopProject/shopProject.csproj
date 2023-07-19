@@ -10180,6 +10180,7 @@
     <Content Include="Views\Account\SuccsessMessageForRegister.cshtml" />
     <Content Include="Views\ManagementEmail\ActivationEmail.cshtml" />
     <Content Include="Views\Account\ActiveUser.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -15,11 +15,13 @@ namespace shopProject.Controllers
     {
         projectShopDBEntities db = new projectShopDBEntities();
         // GET: Account
+        [Route("Register")]
         public ActionResult Register()
         {
             return View();
         }
         [HttpPost]
+        [Route("Register")]
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel register)
         {
@@ -69,5 +71,41 @@ namespace shopProject.Controllers
             return View();
         }
 
+        [Route("Login")]
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+
+        [Route("Login")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(LoginVeiwModel login)
+        {
+            if (ModelState.IsValid)
+            {
+                string hashPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "MD5");
+                var user = db.User.SingleOrDefault(u => u.Email.Trim().ToLower() == login.Email.Trim().ToLower() && u.Password == hashPassword);
+                if (user != null)
+                {
+                    if(user.IsActive == true)
+                    {
+                        FormsAuthentication.SetAuthCookie(user.UserName, login.RememberMe);
+                        return Redirect("/");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "حساب کاربری شما فعال نمی باشد");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("Email", "کاربری با مشخصات مورد نظر یافت نشد");
+                }
+            }
+
+            return View(login);
+        }
     }
 }
