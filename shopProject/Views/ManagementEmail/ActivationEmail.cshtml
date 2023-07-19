@@ -1,0 +1,16 @@
+﻿@model ProjectShopCMS.DAL.User
+@using System.Configuration
+@{
+    ViewBag.Title = "ایمیل فعال سازی";
+}
+
+<div class="container">
+    <div class="row">
+        <div style="direction : rtl;padding : 30px;background-color:darkgrey;">
+            <h1>@Model.UserName عزیز با تشکر از ثبت نام شما</h1>
+            <p>جهت فعالسازی اکانت خود بر روی لینک 
+            <a href="@ConfigurationManager.AppSettings["shopSportX"]Account/ActiveUser/@Model.ActivationCode">لینک فعال سازی</a>
+            کلیک کنید</p>
+        </div>
+    </div>
+</div>

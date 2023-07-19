@@ -1,4 +1,6 @@
-﻿using ProjectShopCMS.DAL;
+﻿using MyEshop;
+using ProjectShopCMS;
+using ProjectShopCMS.DAL;
 using ProjectShopCMS.DAL.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -37,6 +39,10 @@ namespace shopProject.Controllers
                     };
                     db.User.Add(user);
                     db.SaveChanges();
+                    #region ActiveEmail
+                    string body = PartialToString.RenderPartialView("ManagementEmail", "ActivationEmail", user);
+                    SendEmail.Send(user.Email, "ایمیل فعالسازی", body);
+                    #endregion
                     return View("SuccsessMessageForRegister",user);
                 }
                 else
@@ -46,5 +52,22 @@ namespace shopProject.Controllers
             }
             return View(register);
         }
+        public ActionResult ActiveUser(string id)
+        {
+            var user = db.User.SingleOrDefault(u => u.ActivationCode == id);
+            if(user == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                user.IsActive = true;
+                user.ActivationCode = Guid.NewGuid().ToString();
+                db.SaveChanges();
+                ViewBag.UserName = user.UserName;
+            }
+            return View();
+        }
+
     }
 }
