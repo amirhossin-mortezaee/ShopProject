@@ -127,8 +127,16 @@
                         <div class="text-center text-md-right">
                             <ul class="header_list">
                                 <li><a href="compare.html"><i class="ti-control-shuffle"></i><span>مقایسه</span></a></li>
-                                <li><a href="wishlist.html"><i class="ti-heart"></i><span>مورد علاقه</span></a></li>
-                                <li><a href="login.html"><i class="ti-user"></i><span>ورود</span></a></li>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <li><a href="#"><i></i><span>@User.Identity.Name عزیز خوش آمدید</span></a></li>
+                                    <li><a href="/LogOut"><i class="fa fa-power-off"></i><span>خروج</span></a></li>
+                                 }
+                                else
+                                {
+                                   <li><a href="/Register"><i class="fa fa-user-plus"></i><span>عضویت</span></a></li>
+                                   <li><a href="/Login"><i class="fa fa-user"></i><span>ورود</span></a></li>
+                                }
                             </ul>
                         </div>
                     </div>

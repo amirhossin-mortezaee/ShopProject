@@ -11,6 +11,7 @@ using ProjectShopCMS.DAL;
 
 namespace shopProject.Areas.Admin.Controllers
 {
+
     public class SlidersController : Controller
     {
         private projectShopDBEntities db = new projectShopDBEntities();
@@ -35,7 +36,7 @@ namespace shopProject.Areas.Admin.Controllers
             }
             return View(slider);
         }
-
+        [Authorize]
         // GET: Admin/Sliders/Create
         public ActionResult Create()
         {

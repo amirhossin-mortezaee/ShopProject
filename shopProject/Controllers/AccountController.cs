@@ -81,7 +81,7 @@ namespace shopProject.Controllers
         [Route("Login")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginVeiwModel login)
+        public ActionResult Login(LoginVeiwModel login,string returnUrl = "/")
         {
             if (ModelState.IsValid)
             {
@@ -92,7 +92,7 @@ namespace shopProject.Controllers
                     if(user.IsActive == true)
                     {
                         FormsAuthentication.SetAuthCookie(user.UserName, login.RememberMe);
-                        return Redirect("/");
+                        return Redirect(returnUrl);
                     }
                     else
                     {
@@ -106,6 +106,14 @@ namespace shopProject.Controllers
             }
 
             return View(login);
+        }
+
+
+        [Route("Logout")]
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect("/");
         }
     }
 }
