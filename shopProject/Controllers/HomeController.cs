@@ -14,14 +14,14 @@ namespace shopProject.Controllers
         // GET: Home
         public ActionResult Index()
         {
-
             return View();
         }
         public ActionResult slider()
         {
-            DateTime dateTime = new DateTime(PersianDateTime.Now.Year, PersianDateTime.Now.Month, PersianDateTime.Now.Day, 0, 0, 0);
-            var GetSlider = db.Slider.Where(item => item.IsActive&& item.StartSliderDate <= dateTime&& item.EndSliderDate >= dateTime);
-            return PartialView(GetSlider);
+            DateTime datetime = new DateTime(PersianDateTime.Now.Year,PersianDateTime.Now.Month,PersianDateTime.Now.Day, 0, 0, 0);
+
+            var getSlider = db.Slider.Where(s => s.IsActive && s.StartSliderDate <= datetime && s.EndSliderDate >= datetime);
+            return PartialView(getSlider);
         }
     }
 }

@@ -10182,6 +10182,10 @@
     <Content Include="Views\ManagementEmail\ActivationEmail.cshtml" />
     <Content Include="Views\Account\ActiveUser.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\ForgetPassword.cshtml" />
+    <Content Include="Views\ManagementEmail\RecoveryPasswordEmail.cshtml" />
+    <Content Include="Views\Account\successMessageForRecoveryPassword.cshtml" />
+    <Content Include="Views\Account\RecoveryPassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

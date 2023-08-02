@@ -13,5 +13,10 @@ namespace shopProject.Controllers
         {
             return PartialView();
         }
+
+        public ActionResult RecoveryPasswordEmail()
+        {
+            return PartialView();
+        }
     }
 }

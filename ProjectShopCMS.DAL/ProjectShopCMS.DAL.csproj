@@ -77,7 +77,9 @@
     <Compile Include="User.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ForgetPasswordViewModel.cs" />
     <Compile Include="ViewModel\LoginVeiwModel.cs" />
+    <Compile Include="ViewModel\RecoveryPasswordViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

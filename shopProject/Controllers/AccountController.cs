@@ -108,6 +108,63 @@ namespace shopProject.Controllers
             return View(login);
         }
 
+        [Route("ForgetPassword")]
+        public ActionResult ForgetPassword()
+        {
+            return View();
+        }
+
+        [Route("ForgetPassword")]
+        [HttpPost]
+        public ActionResult ForgetPassword(ForgetPasswordViewModel forgetVM)
+        {
+            if(ModelState.IsValid)
+            {
+                var user = db.User.SingleOrDefault(u => u.Email == forgetVM.Email);
+                if(user == null)
+                {
+                    ModelState.AddModelError("Email", "کاربری با مشخصات وارد شده یافت نشد");
+                }
+                else
+                {
+                    if (user.IsActive == true)
+                    {
+                        #region ForgetPassword
+                        string body = PartialToString.RenderPartialView("ManagementEmail", "RecoveryPasswordEmail", user);
+                        SendEmail.Send(user.Email, "ایمیل بازیابی رمز عبور", body);
+                        #endregion
+                        return View("successMessageForRecoveryPassword",user);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Email", "حساب کاربری شما فعال نمی باشد");
+                    }
+                }
+            }
+            return View();
+        }
+
+        public ActionResult RecoveryPassword(string id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult RecoveryPassword(string id,RecoveryPasswordViewModel recoveryVM)
+        {
+            var user = db.User.SingleOrDefault(u => u.ActivationCode == id);
+            if(user == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                user.Password = FormsAuthentication.HashPasswordForStoringInConfigFile(user.Password, "MD5");
+                user.ActivationCode = Guid.NewGuid().ToString();
+                db.SaveChanges();
+                return RedirectToAction("Login", new { Recovery = true }) ;
+            }
+            return View();
+        }
 
         [Route("Logout")]
         public ActionResult LogOut()

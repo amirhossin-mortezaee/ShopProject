@@ -39,9 +39,17 @@
                             <form method="post">
                                 @Html.AntiForgeryToken()
                                 <div class="form-group">
-                                    @if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"]  != null) {
+                                    @if (User.Identity.IsAuthenticated && Request.QueryString["ReturnUrl"] != null)
+                                    {
                                         <div class="alert alert-danger">
                                             <p>@User.Identity.Name عزیز شما مجوز دسترسی به صفحه مورد نظر را ندارید</p>
+                                        </div>
+                                    }
+                                    @if (Request.QueryString["Recovery"] != null)
+                                    {
+                                        <div class="alert alert-success">
+                                            <p>@User.Identity.Name کلمه عبور شما با موفقیت تغییر کرد</p>
+                                            <p>از طریق صفحه ورود می توانید وارد حساب کاربری خود شوید</p>
                                         </div>
                                     }
                                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "لطفا ایمیل را وارد نمایید" } })
@@ -59,7 +67,7 @@
                                             <label for="exampleCheckbox1"><span>مرا به خاطر بسپار</span></label>
                                         </div>
                                     </div>
-                                    @*<a href="#">رمز عبور را فراموش کرده اید؟</a>*@
+                                    <a href="/ForgetPassword">رمز عبور را فراموش کرده اید؟</a>
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-fill-out btn-block">ورود</button>
