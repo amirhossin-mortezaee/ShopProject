@@ -16,8 +16,21 @@ namespace shopProject
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "shopProject.Controllers" }
             );
+            routes.MapRoute(
+                name: "adminRoutes",
+                url: "{controller}/{action}/{id}",
+                defaults: new { area="Admin",controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "shopProject.Areas.Admin.Controllers" }
+            ).DataTokens.Add("area","Admin");
+            routes.MapRoute(
+                name: "UserPanel",
+                url: "{controller}/{action}/{id}",
+                defaults: new { area = "UserPanel", controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "shopProject.Areas.User.Controllers" }
+            ).DataTokens.Add("area", "UserPanel");
         }
     }
 }

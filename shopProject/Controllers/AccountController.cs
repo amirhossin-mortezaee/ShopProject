@@ -85,7 +85,7 @@ namespace shopProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                string hashPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "MD5");
+                string hashPassword = FormsAuthentication.HashPasswordForStoringInConfigFile(login.Password, "MD5").ToLower();
                 var user = db.User.SingleOrDefault(u => u.Email.Trim().ToLower() == login.Email.Trim().ToLower() && u.Password == hashPassword);
                 if (user != null)
                 {

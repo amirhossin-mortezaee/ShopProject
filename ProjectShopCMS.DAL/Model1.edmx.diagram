@@ -9,6 +9,8 @@
         <EntityTypeShape EntityType="projectShopDBModel.Roles" Width="1.5" PointX="3.375" PointY="1.5" />
         <EntityTypeShape EntityType="projectShopDBModel.User" Width="1.5" PointX="5.625" PointY="1" />
         <AssociationConnector Association="projectShopDBModel.FK_User_Roles" />
+        <EntityTypeShape EntityType="projectShopDBModel.ProductGrops" Width="1.5" PointX="0.75" PointY="4.75" />
+        <AssociationConnector Association="projectShopDBModel.FK_ProductGrops_ProductGrops" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

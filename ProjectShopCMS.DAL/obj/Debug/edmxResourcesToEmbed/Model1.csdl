@@ -20,6 +20,11 @@
       <End Role="Roles" EntitySet="Roles" />
       <End Role="User" EntitySet="User" />
     </AssociationSet>
+    <EntitySet Name="ProductGrops" EntityType="projectShopDBModel.ProductGrops" />
+    <AssociationSet Name="FK_ProductGrops_ProductGrops" Association="projectShopDBModel.FK_ProductGrops_ProductGrops">
+      <End Role="ProductGrops" EntitySet="ProductGrops" />
+      <End Role="ProductGrops1" EntitySet="ProductGrops" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
     <Key>
@@ -53,6 +58,28 @@
       </Principal>
       <Dependent Role="User">
         <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductGrops">
+    <Key>
+      <PropertyRef Name="GroupId" />
+    </Key>
+    <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GroupTitle" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="ParentId" Type="Int32" />
+    <NavigationProperty Name="ProductGrops1" Relationship="projectShopDBModel.FK_ProductGrops_ProductGrops" FromRole="ProductGrops" ToRole="ProductGrops1" />
+    <NavigationProperty Name="ProductGrops2" Relationship="projectShopDBModel.FK_ProductGrops_ProductGrops" FromRole="ProductGrops1" ToRole="ProductGrops" />
+  </EntityType>
+  <Association Name="FK_ProductGrops_ProductGrops">
+    <End Type="projectShopDBModel.ProductGrops" Role="ProductGrops" Multiplicity="0..1" />
+    <End Type="projectShopDBModel.ProductGrops" Role="ProductGrops1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGrops">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="ProductGrops1">
+        <PropertyRef Name="ParentId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

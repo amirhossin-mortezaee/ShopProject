@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="projectShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ProductGrops">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="RoleId" />
@@ -38,6 +46,18 @@
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="CreateDate" Type="datetime" Nullable="false" />
         </EntityType>
+        <Association Name="FK_ProductGrops_ProductGrops">
+          <End Role="ProductGrops" Type="Self.ProductGrops" Multiplicity="0..1" />
+          <End Role="ProductGrops1" Type="Self.ProductGrops" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductGrops">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="ProductGrops1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="User" Type="Self.User" Multiplicity="*" />
@@ -51,9 +71,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="projectShopDBModelStoreContainer">
+          <EntitySet Name="ProductGrops" EntityType="Self.ProductGrops" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ProductGrops_ProductGrops" Association="Self.FK_ProductGrops_ProductGrops">
+            <End Role="ProductGrops" EntitySet="ProductGrops" />
+            <End Role="ProductGrops1" EntitySet="ProductGrops" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_Roles" Association="Self.FK_User_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="User" EntitySet="User" />
@@ -82,6 +107,11 @@
           <AssociationSet Name="FK_User_Roles" Association="projectShopDBModel.FK_User_Roles">
             <End Role="Roles" EntitySet="Roles" />
             <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <EntitySet Name="ProductGrops" EntityType="projectShopDBModel.ProductGrops" />
+          <AssociationSet Name="FK_ProductGrops_ProductGrops" Association="projectShopDBModel.FK_ProductGrops_ProductGrops">
+            <End Role="ProductGrops" EntitySet="ProductGrops" />
+            <End Role="ProductGrops1" EntitySet="ProductGrops" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Roles">
@@ -116,6 +146,28 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ProductGrops">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupTitle" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <NavigationProperty Name="ProductGrops1" Relationship="projectShopDBModel.FK_ProductGrops_ProductGrops" FromRole="ProductGrops" ToRole="ProductGrops1" />
+          <NavigationProperty Name="ProductGrops2" Relationship="projectShopDBModel.FK_ProductGrops_ProductGrops" FromRole="ProductGrops1" ToRole="ProductGrops" />
+        </EntityType>
+        <Association Name="FK_ProductGrops_ProductGrops">
+          <End Type="projectShopDBModel.ProductGrops" Role="ProductGrops" Multiplicity="0..1" />
+          <End Type="projectShopDBModel.ProductGrops" Role="ProductGrops1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductGrops">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="ProductGrops1">
+              <PropertyRef Name="ParentId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -158,6 +210,15 @@
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductGrops">
+            <EntityTypeMapping TypeName="projectShopDBModel.ProductGrops">
+              <MappingFragment StoreEntitySet="ProductGrops">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="GroupTitle" ColumnName="GroupTitle" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
