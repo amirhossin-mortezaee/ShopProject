@@ -78,8 +78,7 @@ namespace shopProject.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ParentId = new SelectList(db.ProductGrops, "GroupId", "GroupTitle", productGrops.ParentId);
-            return View(productGrops);
+            return PartialView(productGrops);
         }
 
         // POST: Admin/ProductGrops/Edit/5
@@ -93,36 +92,23 @@ namespace shopProject.Areas.Admin.Controllers
             {
                 db.Entry(productGrops).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return PartialView("ListProductGrops", db.ProductGrops.Where(g => g.ParentId == null));
             }
             ViewBag.ParentId = new SelectList(db.ProductGrops, "GroupId", "GroupTitle", productGrops.ParentId);
             return View(productGrops);
         }
-
-        // GET: Admin/ProductGrops/Delete/5
-        public ActionResult Delete(int? id)
+        public void Delete(int id)
         {
-            if (id == null)
+            var group = db.ProductGrops.Find(id);
+            if (group.ProductGrops1.Any())
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                foreach(var subgroup in db.ProductGrops.Where(g => g.ParentId == id))
+                {
+                    db.ProductGrops.Remove(subgroup);
+                }
             }
-            ProductGrops productGrops = db.ProductGrops.Find(id);
-            if (productGrops == null)
-            {
-                return HttpNotFound();
-            }
-            return View(productGrops);
-        }
-
-        // POST: Admin/ProductGrops/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            ProductGrops productGrops = db.ProductGrops.Find(id);
-            db.ProductGrops.Remove(productGrops);
+            db.ProductGrops.Remove(group);
             db.SaveChanges();
-            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)

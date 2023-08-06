@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace ProjectShopCMS.DAL
 {
-    class ProductGropsMetaData
+    public class ProductGropsMetaData
     {
+
         public int GroupId { get; set; }
-        [Display(Name = "عنوان گروه")]
+        [Display(Name = "عنوان سر گروه")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string GroupTitle { get; set; }
         [Display(Name = "عنوان زیر گروه ها")]

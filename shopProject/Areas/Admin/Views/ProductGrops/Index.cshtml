@@ -48,6 +48,24 @@
             });
     }
 
+    function Edit(id) {
+        $.get("/Admin/ProductGrops/Edit/" + id,
+            function (result) {
+                $(".modal").modal('show');
+                $(".modal-title").html("ویرایش سر گروه");
+                $(".modal-body").html(result);
+            });
+    }
+
+    function Delete(id) {
+        if (confirm("آیا از حذف این سر گروه اطمینان دارید؟")) {
+            $.get("/Admin/ProductGrops/Delete/" + id,
+                function () {
+                    $("#Row_" + id).hide('slow');
+                });
+        }
+    }
+
     function success() {
         $(".modal").modal("hide");
     }

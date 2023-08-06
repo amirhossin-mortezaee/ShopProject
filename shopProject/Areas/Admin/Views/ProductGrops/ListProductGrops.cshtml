@@ -2,7 +2,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.GroupTitle)
+            @Html.DisplayName("عنوان سر گروه")
         </th>
         <th>
             زیر گروه ها
@@ -12,7 +12,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr id="Row_@item.GroupId">
             <td>
                 @Html.DisplayFor(modelItem => item.GroupTitle)
             </td>
@@ -30,9 +30,9 @@
             <td>
                 <a class="btn btn-success btn-sm">افزودن زیر گروه</a>
 
-                <a class="btn btn-warning btn-sm">ویرایش سر گروه</a>
+                <a class="btn btn-warning btn-sm" onclick="Edit(@item.GroupId)">ویرایش سر گروه</a>
 
-                <a class="btn btn-danger btn-sm">حذف سر گروه</a>
+                <a class="btn btn-danger btn-sm" onclick="Delete(@item.GroupId)">حذف سر گروه</a>
             </td>
         </tr>
     }
