@@ -29,5 +29,9 @@ namespace ProjectShopCMS.DAL
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<ProductGrops> ProductGrops { get; set; }
+        public virtual DbSet<ProductGallery> ProductGallery { get; set; }
+        public virtual DbSet<Products> Products { get; set; }
+        public virtual DbSet<ProductTags> ProductTags { get; set; }
+        public virtual DbSet<SelectedProductCateGory> SelectedProductCateGory { get; set; }
     }
 }

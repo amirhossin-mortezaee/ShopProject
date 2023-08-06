@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="projectShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ProductGallery">
+    <Key>
+      <PropertyRef Name="GalleryId" />
+    </Key>
+    <Property Name="GalleryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="ImageName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProductGrops">
     <Key>
       <PropertyRef Name="GroupId" />
@@ -8,6 +16,26 @@
     <Property Name="GroupTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
     <Property Name="ParentId" Type="int" />
   </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="ShortDiscription" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="TextProduct" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="int" Nullable="false" />
+    <Property Name="ImageName" Type="varchar" MaxLength="50" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductTags">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Tag" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
   <EntityType Name="Roles">
     <Key>
       <PropertyRef Name="RoleId" />
@@ -15,6 +43,14 @@
     <Property Name="RoleId" Type="int" Nullable="false" />
     <Property Name="RoleTitle" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="RoleName" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SelectedProductCateGory">
+    <Key>
+      <PropertyRef Name="CateGoryId" />
+    </Key>
+    <Property Name="CateGoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="GroupId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Slider">
     <Key>
@@ -41,6 +77,18 @@
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <Association Name="FK_ProductGallery_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductGallery" Type="Self.ProductGallery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductGallery">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductGrops_ProductGrops">
     <End Role="ProductGrops" Type="Self.ProductGrops" Multiplicity="0..1" />
     <End Role="ProductGrops1" Type="Self.ProductGrops" Multiplicity="*" />
@@ -50,6 +98,42 @@
       </Principal>
       <Dependent Role="ProductGrops1">
         <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductTags_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductTags" Type="Self.ProductTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductTags">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectedProductCateGory_ProductGrops">
+    <End Role="ProductGrops" Type="Self.ProductGrops" Multiplicity="1" />
+    <End Role="SelectedProductCateGory" Type="Self.SelectedProductCateGory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGrops">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="SelectedProductCateGory">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectedProductCateGory_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="SelectedProductCateGory" Type="Self.SelectedProductCateGory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="SelectedProductCateGory">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -66,13 +150,33 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="projectShopDBModelStoreContainer">
+    <EntitySet Name="ProductGallery" EntityType="Self.ProductGallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductGrops" EntityType="Self.ProductGrops" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductTags" EntityType="Self.ProductTags" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SelectedProductCateGory" EntityType="Self.SelectedProductCateGory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ProductGallery_Products" Association="Self.FK_ProductGallery_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductGallery" EntitySet="ProductGallery" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductGrops_ProductGrops" Association="Self.FK_ProductGrops_ProductGrops">
       <End Role="ProductGrops" EntitySet="ProductGrops" />
       <End Role="ProductGrops1" EntitySet="ProductGrops" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductTags_Products" Association="Self.FK_ProductTags_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductTags" EntitySet="ProductTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectedProductCateGory_ProductGrops" Association="Self.FK_SelectedProductCateGory_ProductGrops">
+      <End Role="ProductGrops" EntitySet="ProductGrops" />
+      <End Role="SelectedProductCateGory" EntitySet="SelectedProductCateGory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectedProductCateGory_Products" Association="Self.FK_SelectedProductCateGory_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="SelectedProductCateGory" EntitySet="SelectedProductCateGory" />
     </AssociationSet>
     <AssociationSet Name="FK_User_Roles" Association="Self.FK_User_Roles">
       <End Role="Roles" EntitySet="Roles" />

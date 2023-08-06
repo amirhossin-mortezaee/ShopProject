@@ -25,6 +25,26 @@
       <End Role="ProductGrops" EntitySet="ProductGrops" />
       <End Role="ProductGrops1" EntitySet="ProductGrops" />
     </AssociationSet>
+    <EntitySet Name="ProductGallery" EntityType="projectShopDBModel.ProductGallery" />
+    <EntitySet Name="Products" EntityType="projectShopDBModel.Products" />
+    <EntitySet Name="ProductTags" EntityType="projectShopDBModel.ProductTags" />
+    <EntitySet Name="SelectedProductCateGory" EntityType="projectShopDBModel.SelectedProductCateGory" />
+    <AssociationSet Name="FK_ProductGallery_Products" Association="projectShopDBModel.FK_ProductGallery_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductGallery" EntitySet="ProductGallery" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectedProductCateGory_ProductGrops" Association="projectShopDBModel.FK_SelectedProductCateGory_ProductGrops">
+      <End Role="ProductGrops" EntitySet="ProductGrops" />
+      <End Role="SelectedProductCateGory" EntitySet="SelectedProductCateGory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductTags_Products" Association="projectShopDBModel.FK_ProductTags_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductTags" EntitySet="ProductTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SelectedProductCateGory_Products" Association="projectShopDBModel.FK_SelectedProductCateGory_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="SelectedProductCateGory" EntitySet="SelectedProductCateGory" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
     <Key>
@@ -70,6 +90,7 @@
     <Property Name="ParentId" Type="Int32" />
     <NavigationProperty Name="ProductGrops1" Relationship="projectShopDBModel.FK_ProductGrops_ProductGrops" FromRole="ProductGrops" ToRole="ProductGrops1" />
     <NavigationProperty Name="ProductGrops2" Relationship="projectShopDBModel.FK_ProductGrops_ProductGrops" FromRole="ProductGrops1" ToRole="ProductGrops" />
+    <NavigationProperty Name="SelectedProductCateGory" Relationship="projectShopDBModel.FK_SelectedProductCateGory_ProductGrops" FromRole="ProductGrops" ToRole="SelectedProductCateGory" />
   </EntityType>
   <Association Name="FK_ProductGrops_ProductGrops">
     <End Type="projectShopDBModel.ProductGrops" Role="ProductGrops" Multiplicity="0..1" />
@@ -80,6 +101,97 @@
       </Principal>
       <Dependent Role="ProductGrops1">
         <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductGallery">
+    <Key>
+      <PropertyRef Name="GalleryId" />
+    </Key>
+    <Property Name="GalleryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="projectShopDBModel.FK_ProductGallery_Products" FromRole="ProductGallery" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductTitle" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="ShortDiscription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="TextProduct" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="ImageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="ProductGallery" Relationship="projectShopDBModel.FK_ProductGallery_Products" FromRole="Products" ToRole="ProductGallery" />
+    <NavigationProperty Name="ProductTags" Relationship="projectShopDBModel.FK_ProductTags_Products" FromRole="Products" ToRole="ProductTags" />
+    <NavigationProperty Name="SelectedProductCateGory" Relationship="projectShopDBModel.FK_SelectedProductCateGory_Products" FromRole="Products" ToRole="SelectedProductCateGory" />
+  </EntityType>
+  <EntityType Name="ProductTags">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Tag" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="projectShopDBModel.FK_ProductTags_Products" FromRole="ProductTags" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="SelectedProductCateGory">
+    <Key>
+      <PropertyRef Name="CateGoryId" />
+    </Key>
+    <Property Name="CateGoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="GroupId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ProductGrops" Relationship="projectShopDBModel.FK_SelectedProductCateGory_ProductGrops" FromRole="SelectedProductCateGory" ToRole="ProductGrops" />
+    <NavigationProperty Name="Products" Relationship="projectShopDBModel.FK_SelectedProductCateGory_Products" FromRole="SelectedProductCateGory" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK_ProductGallery_Products">
+    <End Type="projectShopDBModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="projectShopDBModel.ProductGallery" Role="ProductGallery" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductGallery">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectedProductCateGory_ProductGrops">
+    <End Type="projectShopDBModel.ProductGrops" Role="ProductGrops" Multiplicity="1" />
+    <End Type="projectShopDBModel.SelectedProductCateGory" Role="SelectedProductCateGory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductGrops">
+        <PropertyRef Name="GroupId" />
+      </Principal>
+      <Dependent Role="SelectedProductCateGory">
+        <PropertyRef Name="GroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductTags_Products">
+    <End Type="projectShopDBModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="projectShopDBModel.ProductTags" Role="ProductTags" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductTags">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SelectedProductCateGory_Products">
+    <End Type="projectShopDBModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="projectShopDBModel.SelectedProductCateGory" Role="SelectedProductCateGory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="SelectedProductCateGory">
+        <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

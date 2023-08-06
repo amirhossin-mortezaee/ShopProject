@@ -11,6 +11,14 @@
         <AssociationConnector Association="projectShopDBModel.FK_User_Roles" />
         <EntityTypeShape EntityType="projectShopDBModel.ProductGrops" Width="1.5" PointX="0.75" PointY="4.75" />
         <AssociationConnector Association="projectShopDBModel.FK_ProductGrops_ProductGrops" />
+        <EntityTypeShape EntityType="projectShopDBModel.ProductGallery" Width="1.5" PointX="5.625" PointY="6.5" />
+        <EntityTypeShape EntityType="projectShopDBModel.Products" Width="1.5" PointX="3.375" PointY="7.25" />
+        <EntityTypeShape EntityType="projectShopDBModel.ProductTags" Width="1.5" PointX="5.625" PointY="11.75" />
+        <EntityTypeShape EntityType="projectShopDBModel.SelectedProductCateGory" Width="1.5" PointX="8.625" PointY="6.5" />
+        <AssociationConnector Association="projectShopDBModel.FK_ProductGallery_Products" />
+        <AssociationConnector Association="projectShopDBModel.FK_SelectedProductCateGory_ProductGrops" />
+        <AssociationConnector Association="projectShopDBModel.FK_ProductTags_Products" />
+        <AssociationConnector Association="projectShopDBModel.FK_SelectedProductCateGory_Products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

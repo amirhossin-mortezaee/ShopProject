@@ -12,22 +12,28 @@ namespace ProjectShopCMS.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ProductGrops
+    public partial class Products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductGrops()
+        public Products()
         {
-            this.ProductGrops1 = new HashSet<ProductGrops>();
+            this.ProductGallery = new HashSet<ProductGallery>();
+            this.ProductTags = new HashSet<ProductTags>();
             this.SelectedProductCateGory = new HashSet<SelectedProductCateGory>();
         }
     
-        public int GroupId { get; set; }
-        public string GroupTitle { get; set; }
-        public Nullable<int> ParentId { get; set; }
+        public int ProductId { get; set; }
+        public string ProductTitle { get; set; }
+        public string ShortDiscription { get; set; }
+        public string TextProduct { get; set; }
+        public int Price { get; set; }
+        public string ImageName { get; set; }
+        public System.DateTime CreateDate { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductGrops> ProductGrops1 { get; set; }
-        public virtual ProductGrops ProductGrops2 { get; set; }
+        public virtual ICollection<ProductGallery> ProductGallery { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductTags> ProductTags { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SelectedProductCateGory> SelectedProductCateGory { get; set; }
     }
