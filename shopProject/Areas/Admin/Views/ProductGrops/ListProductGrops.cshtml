@@ -22,13 +22,22 @@
                     <ul>
                         @foreach (var subGroup in item.ProductGrops1)
                         {
-                            <li>@subGroup.GroupTitle</li>
+                            <li id="Row_@subGroup.GroupId">
+                                @subGroup.GroupTitle
+                                <a class="text-warning" onclick="Edit(@subGroup.GroupId)">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+
+                                <a class="text-danger" onclick="Delete(@subGroup.GroupId)">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </li>
                         }
                     </ul>
                 }
             </td>
             <td>
-                <a class="btn btn-success btn-sm">افزودن زیر گروه</a>
+                <a class="btn btn-success btn-sm" onclick="Create(@item.GroupId)">افزودن زیر گروه</a>
 
                 <a class="btn btn-warning btn-sm" onclick="Edit(@item.GroupId)">ویرایش سر گروه</a>
 

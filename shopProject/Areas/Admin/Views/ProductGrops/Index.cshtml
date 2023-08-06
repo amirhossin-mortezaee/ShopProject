@@ -39,13 +39,14 @@
 </div>
 
 <script>
-    function Create() {
-        $.get("/Admin/ProductGrops/Create",
-            function (result) {
-                $(".modal").modal();
-                $(".modal-title").html("افزودن سر گروه");
-                $(".modal-body").html(result);
-            });
+    function Create(parentid) {
+
+        $.get("/Admin/ProductGrops/Create/" + parentid,
+                function (result) {
+                    $(".modal").modal();
+                    $(".modal-title").html("  افزودن");
+                    $(".modal-body").html(result);
+                });
     }
 
     function Edit(id) {

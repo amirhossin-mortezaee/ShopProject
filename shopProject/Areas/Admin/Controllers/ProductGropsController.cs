@@ -43,9 +43,14 @@ namespace shopProject.Areas.Admin.Controllers
         }
 
         // GET: Admin/ProductGrops/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return PartialView();
+            return PartialView(
+                new ProductGrops()
+                {
+                    ParentId = id
+                }
+                );
         }
 
         // POST: Admin/ProductGrops/Create
@@ -92,7 +97,7 @@ namespace shopProject.Areas.Admin.Controllers
             {
                 db.Entry(productGrops).State = EntityState.Modified;
                 db.SaveChanges();
-                return PartialView("ListProductGrops", db.ProductGrops.Where(g => g.ParentId == null));
+                return PartialView("ListProductGrops", db.ProductGrops.Where(g => g.ParentId == null).Include(x => x.ProductGrops1));
             }
             ViewBag.ParentId = new SelectList(db.ProductGrops, "GroupId", "GroupTitle", productGrops.ParentId);
             return View(productGrops);
