@@ -8893,6 +8893,12 @@
     <Content Include="Areas\Admin\Views\Users\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGrops\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGrops\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGrops\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGrops\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGrops\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductGrops\ListProductGrops.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -8913,6 +8919,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductGropsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\SlidersController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />

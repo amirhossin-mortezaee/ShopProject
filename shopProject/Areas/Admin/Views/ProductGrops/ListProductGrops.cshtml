@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ProjectShopCMS.DAL.ProductGrops>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupTitle)
+        </th>
+        <th>
+            زیر گروه ها
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupTitle)
+            </td>
+            <td>
+                @if (item.ProductGrops1.Any())
+                {
+                    <ul>
+                        @foreach (var subGroup in item.ProductGrops1)
+                        {
+                            <li>@subGroup.GroupTitle</li>
+                        }
+                    </ul>
+                }
+            </td>
+            <td>
+                <a class="btn btn-success btn-sm">افزودن زیر گروه</a>
+
+                <a class="btn btn-warning btn-sm">ویرایش سر گروه</a>
+
+                <a class="btn btn-danger btn-sm">حذف سر گروه</a>
+            </td>
+        </tr>
+    }
+
+</table>
