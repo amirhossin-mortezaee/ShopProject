@@ -10052,7 +10052,7 @@
     <Content Include="icheck-bootstrap-master\icheck-bootstrap.css" />
     <Content Include="icheck-bootstrap-master\icheck-bootstrap.min.css" />
     <Content Include="icheck-bootstrap-master\_layouts\default.html" />
-    <Content Include="Images\ProductsImages\no-Product-Image.png" />
+    <Content Include="Images\ProductsImages\MiniProductImage\no-Product-Image.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Jquery-1.9.1.min.js" />
@@ -10161,6 +10161,7 @@
     <Compile Include="Tools\HijriDateTime.cs" />
     <Compile Include="Tools\ImageResizer.cs" />
     <Compile Include="Tools\PartialToString.cs" />
+    <Compile Include="Tools\PersianDate.cs" />
     <Compile Include="Tools\PersianDateTime.cs" />
     <Compile Include="Tools\PersianDayOfWeek.cs" />
     <Compile Include="Tools\ProjectRoleProvider.cs" />
@@ -11443,7 +11444,6 @@
     <Folder Include="Areas\Admin\assets\vendor_components\flat-color-icons\PNG\512\A\" />
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\UserPanel\Data\" />
-    <Folder Include="Images\ProductsImages\MiniProductImage\" />
     <Folder Include="Images\Slider\" />
     <Folder Include="Models\" />
   </ItemGroup>

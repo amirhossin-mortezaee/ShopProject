@@ -30,6 +30,7 @@ namespace ProjectShopCMS.DAL
         public string ImageName { get; set; }
         [Display(Name = "تاریخ ایجاد")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [DisplayFormat(DataFormatString = "{0: yyyy/mm/dd}", ApplyFormatInEditMode = true)]
         public System.DateTime CreateDate { get; set; }
     }
 
