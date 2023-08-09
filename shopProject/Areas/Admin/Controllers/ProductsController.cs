@@ -50,28 +50,28 @@ namespace shopProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductTitle,ShortDiscription,TextProduct,Price,ImageName,CreateDate")] Products products,HttpPostedFileBase imageUpload,List<int> selectedProductCategory, string tags)
+        public ActionResult Create([Bind(Include = "ProductId,ProductTitle,ShortDiscription,TextProduct,Price,ImageName,CreateDate")] Products products, HttpPostedFileBase imageUpload, List<int> selectedProductCategory, string tags)
         {
             if (ModelState.IsValid)
             {
-                if(selectedProductCategory == null)
+                if (selectedProductCategory == null)
                 {
                     ViewBag.ErrorselectedProductCategory = true;
                     ViewBag.ProductGroups = db.ProductGrops.ToList();
                     return View(products);
                 }
                 products.ImageName = "no-Product-Image.png";
-                if(imageUpload != null && imageUpload.IsImage())
+                if (imageUpload != null && imageUpload.IsImage())
                 {
                     products.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(imageUpload.FileName);
-                    imageUpload.SaveAs(Server.MapPath("/Images/ProductsImages/"+products.ImageName));
+                    imageUpload.SaveAs(Server.MapPath("/Images/ProductsImages/" + products.ImageName));
 
                     ImageResizer Image = new ImageResizer();
-                    Image.Resize((Server.MapPath("/Images/ProductsImages/" + products.ImageName)),(Server.MapPath("/Images/ProductsImages/MiniProductImage/" + products.ImageName)));
+                    Image.Resize((Server.MapPath("/Images/ProductsImages/" + products.ImageName)), (Server.MapPath("/Images/ProductsImages/MiniProductImage/" + products.ImageName)));
                 }
                 products.CreateDate = DateTime.Now;
                 db.Products.Add(products);
-                foreach(int selected in selectedProductCategory)
+                foreach (int selected in selectedProductCategory)
                 {
                     db.SelectedProductCateGory.Add(new SelectedProductCateGory()
                     {
@@ -86,8 +86,8 @@ namespace shopProject.Areas.Admin.Controllers
                     {
                         db.ProductTags.Add(new ProductTags()
                         {
-                            ProductId=products.ProductId,
-                            Tag=tagName.Trim()
+                            ProductId = products.ProductId,
+                            Tag = tagName.Trim()
                         });
                     }
                 }
@@ -110,6 +110,9 @@ namespace shopProject.Areas.Admin.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.tags = string.Join("،", products.ProductTags.Select(t => t.Tag).ToList());
+            ViewBag.CategorySelected = products.SelectedProductCateGory.ToList();
+            ViewBag.ProductGroups = db.ProductGrops.ToList();
             return View(products);
         }
 
@@ -118,14 +121,53 @@ namespace shopProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductId,ProductTitle,ShortDiscription,TextProduct,Price,ImageName,CreateDate")] Products products)
+        public ActionResult Edit([Bind(Include = "ProductId,ProductTitle,ShortDiscription,TextProduct,Price,ImageName,CreateDate")] Products products, HttpPostedFileBase imageUpload, List<int> selectedProductCategory, string tags)
         {
             if (ModelState.IsValid)
             {
+                if (imageUpload != null && imageUpload.IsImage())
+                {
+                    if(products.ImageName != "no-Product-Image.png")
+                    {
+                        System.IO.File.Delete(Server.MapPath("/Images/ProductsImages/" + products.ImageName));
+                        System.IO.File.Delete(Server.MapPath("/Images/ProductsImages/MiniProductImage/" + products.ImageName));
+                    }
+                    products.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(imageUpload.FileName);
+                    imageUpload.SaveAs(Server.MapPath("/Images/ProductsImages/" + products.ImageName));
+
+                    ImageResizer Image = new ImageResizer();
+                    Image.Resize((Server.MapPath("/Images/ProductsImages/" + products.ImageName)), (Server.MapPath("/Images/ProductsImages/MiniProductImage/" + products.ImageName)));
+                }
                 db.Entry(products).State = EntityState.Modified;
+                db.ProductTags.Where(t => t.ProductId == products.ProductId).ToList().ForEach(t => db.ProductTags.Remove(t));
+                if (!string.IsNullOrEmpty(tags))
+                {
+                    string[] tag = tags.Split('،');
+                    foreach (string tagName in tag)
+                    {
+                        db.ProductTags.Add(new ProductTags()
+                        {
+                            ProductId = products.ProductId,
+                            Tag = tagName.Trim()
+                        });
+                    }
+                }
+
+                db.SelectedProductCateGory.Where(g => g.ProductId == products.ProductId).ToList().ForEach(g => db.SelectedProductCateGory.Remove(g));
+                foreach (int selected in selectedProductCategory)
+                {
+                    db.SelectedProductCateGory.Add(new SelectedProductCateGory()
+                    {
+                        ProductId = products.ProductId,
+                        GroupId = selected
+                    });
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.tags = string.Join("،", products.ProductTags.Select(t => t.Tag).ToList());
+            ViewBag.CategorySelected = products.SelectedProductCateGory.ToList();
+            ViewBag.ProductGroups = db.ProductGrops.ToList();
             return View(products);
         }
 
