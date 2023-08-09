@@ -50,7 +50,7 @@ namespace shopProject.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductId,ProductTitle,ShortDiscription,TextProduct,Price,ImageName,CreateDate")] Products products,HttpPostedFileBase imageUpload,List<int> selectedProductCategory)
+        public ActionResult Create([Bind(Include = "ProductId,ProductTitle,ShortDiscription,TextProduct,Price,ImageName,CreateDate")] Products products,HttpPostedFileBase imageUpload,List<int> selectedProductCategory, string tags)
         {
             if (ModelState.IsValid)
             {
@@ -79,8 +79,19 @@ namespace shopProject.Areas.Admin.Controllers
                         GroupId = selected
                     });
                 }
+                if (!string.IsNullOrEmpty(tags))
+                {
+                    string[] tag = tags.Split('،');
+                    foreach (string tagName in tag)
+                    {
+                        db.ProductTags.Add(new ProductTags()
+                        {
+                            ProductId=products.ProductId,
+                            Tag=tagName.Trim()
+                        });
+                    }
+                }
                 db.SaveChanges();
-                ViewBag.ProductGroups = db.ProductGrops.ToList();
                 return RedirectToAction("Index");
             }
             ViewBag.ProductGroups = db.ProductGrops.ToList();
