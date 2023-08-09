@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace ProjectShopCMS.DAL
 {
@@ -13,16 +14,16 @@ namespace ProjectShopCMS.DAL
         public int ProductId { get; set; }
         [Display(Name = "عنوان محصول")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(350)]
         public string ProductTitle { get; set; }
         [Display(Name = "توضیحات مختصر")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
-        [MaxLength(500)]
+        [DataType(DataType.MultilineText)]
         public string ShortDiscription { get; set; }
         [Display(Name = "توضیحات")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        [AllowHtml]
         public string TextProduct { get; set; }
-        [Display(Name = "قیمت محصول")]
+        [Display(Name = "قیمت")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public int Price { get; set; }
         [Display(Name = "تصویر")]
@@ -30,10 +31,11 @@ namespace ProjectShopCMS.DAL
         [Display(Name = "تاریخ ایجاد")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public System.DateTime CreateDate { get; set; }
-        [MetadataType(typeof(ProductsMetaData))]
-        public partial class Products
-        {
+    }
 
-        }
+    [MetadataType(typeof(ProductsMetaData))]
+    public partial class Products
+    {
+
     }
 }

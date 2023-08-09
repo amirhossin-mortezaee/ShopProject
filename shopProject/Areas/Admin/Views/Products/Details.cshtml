@@ -1,0 +1,66 @@
+﻿@model ProjectShopCMS.DAL.Products
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Products</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortDiscription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortDiscription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TextProduct)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TextProduct)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
