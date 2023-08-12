@@ -17,6 +17,7 @@ namespace ProjectShopCMS.DAL
         public int GalleryId { get; set; }
         public int ProductId { get; set; }
         public string ImageName { get; set; }
+        public string GalleryTitle { get; set; }
     
         public virtual Products Products { get; set; }
     }

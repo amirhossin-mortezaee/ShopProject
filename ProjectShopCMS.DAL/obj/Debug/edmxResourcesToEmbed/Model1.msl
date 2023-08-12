@@ -49,6 +49,7 @@
     <EntitySetMapping Name="ProductGallery">
       <EntityTypeMapping TypeName="projectShopDBModel.ProductGallery">
         <MappingFragment StoreEntitySet="ProductGallery">
+          <ScalarProperty Name="GalleryTitle" ColumnName="GalleryTitle" />
           <ScalarProperty Name="ImageName" ColumnName="ImageName" />
           <ScalarProperty Name="ProductId" ColumnName="ProductId" />
           <ScalarProperty Name="GalleryId" ColumnName="GalleryId" />

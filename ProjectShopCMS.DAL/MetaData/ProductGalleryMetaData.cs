@@ -14,6 +14,9 @@ namespace ProjectShopCMS.DAL
         public int ProductId { get; set; }
         [Display(Name = "تصویر")]
         public string ImageName { get; set; }
+        [Display(Name = "نام تصویر")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string GalleryTitle { get; set; }
     }
     [MetadataType(typeof(ProductGalleryMetaData))]
     public partial class ProductGallery

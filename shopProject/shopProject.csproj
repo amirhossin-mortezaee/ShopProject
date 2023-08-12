@@ -10122,6 +10122,7 @@
     <Content Include="icheck-bootstrap-master\scss\_icheck.scss" />
     <Content Include="icheck-bootstrap-master\scss\_variables.scss" />
     <Content Include="icheck-bootstrap-master\_config.yml" />
+    <Content Include="Areas\Admin\Views\Products\Gallery.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

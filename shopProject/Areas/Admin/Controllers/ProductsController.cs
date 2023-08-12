@@ -197,6 +197,41 @@ namespace shopProject.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public ActionResult Gallery(int id)
+        {
+            ViewBag.Galleries = db.ProductGallery.Where(p => p.ProductId == id).ToList();
+            return View(new ProductGallery() { ProductId = id });
+        }
+
+        [HttpPost]
+        public ActionResult Gallery(ProductGallery gallery, HttpPostedFileBase imageUpload)
+        {
+            if (ModelState.IsValid)
+            {
+                if (imageUpload != null && imageUpload.IsImage())
+                {
+                    gallery.ImageName = Guid.NewGuid().ToString() + Path.GetExtension(imageUpload.FileName);
+                    imageUpload.SaveAs(Server.MapPath("/Images/ProductsImages/" + gallery.ImageName));
+
+                    ImageResizer Image = new ImageResizer();
+                    Image.Resize((Server.MapPath("/Images/ProductsImages/" + gallery.ImageName)), (Server.MapPath("/Images/ProductsImages/MiniProductImage/" + gallery.ImageName)));
+                    db.ProductGallery.Add(gallery);
+                    db.SaveChanges();
+                }
+            }
+            return RedirectToAction("Gallery", new { id = gallery.ProductId });
+        }
+
+        public ActionResult DeleteGallery(int id)
+        {
+            var gallery = db.ProductGallery.Find(id);
+            System.IO.File.Delete(Server.MapPath("/Images/ProductsImages/" + gallery.ImageName));
+            System.IO.File.Delete(Server.MapPath("/Images/ProductsImages/MiniProductImage/" + gallery.ImageName));
+            db.ProductGallery.Remove(gallery);
+            db.SaveChanges();
+            return RedirectToAction("Gallery", new { id = gallery.ProductId });
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

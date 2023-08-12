@@ -112,6 +112,7 @@
     <Property Name="ProductId" Type="Int32" Nullable="false" />
     <Property Name="ImageName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Products" Relationship="projectShopDBModel.FK_ProductGallery_Products" FromRole="ProductGallery" ToRole="Products" />
+    <Property Name="GalleryTitle" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Products">
     <Key>
