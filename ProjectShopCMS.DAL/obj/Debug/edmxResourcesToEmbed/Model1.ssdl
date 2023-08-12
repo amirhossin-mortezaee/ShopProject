@@ -1,5 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="projectShopDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Feature">
+    <Key>
+      <PropertyRef Name="FeatureId" />
+    </Key>
+    <Property Name="FeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FetureTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductFeature">
+    <Key>
+      <PropertyRef Name="ProductFeatureId" />
+    </Key>
+    <Property Name="ProductFeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="FeatureId" Type="int" Nullable="false" />
+    <Property Name="Value" Type="nvarchar" MaxLength="250" />
+  </EntityType>
   <EntityType Name="ProductGallery">
     <Key>
       <PropertyRef Name="GalleryId" />
@@ -78,6 +94,30 @@
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <Association Name="FK_ProductFeature_Feature">
+    <End Role="Feature" Type="Self.Feature" Multiplicity="1" />
+    <End Role="ProductFeature" Type="Self.ProductFeature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feature">
+        <PropertyRef Name="FeatureId" />
+      </Principal>
+      <Dependent Role="ProductFeature">
+        <PropertyRef Name="FeatureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductFeature_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductFeature" Type="Self.ProductFeature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductFeature">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductGallery_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="ProductGallery" Type="Self.ProductGallery" Multiplicity="*" />
@@ -151,6 +191,8 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="projectShopDBModelStoreContainer">
+    <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductFeature" EntityType="Self.ProductFeature" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductGallery" EntityType="Self.ProductGallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductGrops" EntityType="Self.ProductGrops" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
@@ -159,6 +201,14 @@
     <EntitySet Name="SelectedProductCateGory" EntityType="Self.SelectedProductCateGory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ProductFeature_Feature" Association="Self.FK_ProductFeature_Feature">
+      <End Role="Feature" EntitySet="Feature" />
+      <End Role="ProductFeature" EntitySet="ProductFeature" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductFeature_Products" Association="Self.FK_ProductFeature_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductFeature" EntitySet="ProductFeature" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductGallery_Products" Association="Self.FK_ProductGallery_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductGallery" EntitySet="ProductGallery" />

@@ -71,6 +71,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Feature.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MetaData\FeatureMetaData.cs" />
+    <Compile Include="MetaData\ProductFeatureMetaData.cs" />
     <Compile Include="MetaData\ProductGalleryMetaData.cs" />
     <Compile Include="MetaData\ProductsMetaData.cs" />
     <Compile Include="MetaData\ProductGropsMetaData.cs" />
@@ -91,6 +96,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductFeature.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ProductGallery.cs">
       <DependentUpon>Model1.tt</DependentUpon>

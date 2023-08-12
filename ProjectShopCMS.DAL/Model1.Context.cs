@@ -33,5 +33,7 @@ namespace ProjectShopCMS.DAL
         public virtual DbSet<Products> Products { get; set; }
         public virtual DbSet<ProductTags> ProductTags { get; set; }
         public virtual DbSet<SelectedProductCateGory> SelectedProductCateGory { get; set; }
+        public virtual DbSet<Feature> Feature { get; set; }
+        public virtual DbSet<ProductFeature> ProductFeature { get; set; }
     }
 }

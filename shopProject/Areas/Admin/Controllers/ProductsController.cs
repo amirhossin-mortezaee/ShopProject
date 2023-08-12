@@ -232,6 +232,34 @@ namespace shopProject.Areas.Admin.Controllers
             db.SaveChanges();
             return RedirectToAction("Gallery", new { id = gallery.ProductId });
         }
+
+        [HttpGet]
+        public ActionResult FeatureProduct(int id)
+        {
+            ViewBag.Feature = db.ProductFeature.Where(p => p.ProductId == id).ToList();
+            //ViewBag.FeatureId = new SelectList(db.Feature, "FeatureId", "FeatureTitle");
+            ViewBag.FeatureId = new SelectList(db.Feature, "FeatureId", "FetureTitle");
+            return View(new ProductFeature() { ProductId = id });
+        }
+
+        [HttpPost]
+        public ActionResult FeatureProduct(ProductFeature feature)
+        {
+            if (ModelState.IsValid)
+            {
+                db.ProductFeature.Add(feature);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("FeatureProduct",new { id = feature.ProductId});
+        }
+
+        public void DeleteFeature(int id)
+        {
+            var Feature = db.ProductFeature.Find(id);
+            db.ProductFeature.Remove(Feature);
+            db.SaveChanges();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

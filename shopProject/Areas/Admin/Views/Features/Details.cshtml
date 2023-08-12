@@ -1,0 +1,26 @@
+﻿@model ProjectShopCMS.DAL.Feature
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Feature</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FetureTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FetureTitle)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.FeatureId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

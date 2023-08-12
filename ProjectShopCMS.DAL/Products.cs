@@ -20,6 +20,7 @@ namespace ProjectShopCMS.DAL
             this.ProductGallery = new HashSet<ProductGallery>();
             this.ProductTags = new HashSet<ProductTags>();
             this.SelectedProductCateGory = new HashSet<SelectedProductCateGory>();
+            this.ProductFeature = new HashSet<ProductFeature>();
         }
     
         public int ProductId { get; set; }
@@ -36,5 +37,7 @@ namespace ProjectShopCMS.DAL
         public virtual ICollection<ProductTags> ProductTags { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SelectedProductCateGory> SelectedProductCateGory { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ProductFeature> ProductFeature { get; set; }
     }
 }

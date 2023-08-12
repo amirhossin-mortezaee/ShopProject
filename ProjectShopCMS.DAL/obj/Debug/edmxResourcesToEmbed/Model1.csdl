@@ -45,6 +45,16 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="SelectedProductCateGory" EntitySet="SelectedProductCateGory" />
     </AssociationSet>
+    <EntitySet Name="Feature" EntityType="projectShopDBModel.Feature" />
+    <EntitySet Name="ProductFeature" EntityType="projectShopDBModel.ProductFeature" />
+    <AssociationSet Name="FK_ProductFeature_Feature" Association="projectShopDBModel.FK_ProductFeature_Feature">
+      <End Role="Feature" EntitySet="Feature" />
+      <End Role="ProductFeature" EntitySet="ProductFeature" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductFeature_Products" Association="projectShopDBModel.FK_ProductFeature_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductFeature" EntitySet="ProductFeature" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
     <Key>
@@ -128,6 +138,7 @@
     <NavigationProperty Name="ProductGallery" Relationship="projectShopDBModel.FK_ProductGallery_Products" FromRole="Products" ToRole="ProductGallery" />
     <NavigationProperty Name="ProductTags" Relationship="projectShopDBModel.FK_ProductTags_Products" FromRole="Products" ToRole="ProductTags" />
     <NavigationProperty Name="SelectedProductCateGory" Relationship="projectShopDBModel.FK_SelectedProductCateGory_Products" FromRole="Products" ToRole="SelectedProductCateGory" />
+    <NavigationProperty Name="ProductFeature" Relationship="projectShopDBModel.FK_ProductFeature_Products" FromRole="Products" ToRole="ProductFeature" />
   </EntityType>
   <EntityType Name="ProductTags">
     <Key>
@@ -192,6 +203,49 @@
         <PropertyRef Name="ProductId" />
       </Principal>
       <Dependent Role="SelectedProductCateGory">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Feature">
+    <Key>
+      <PropertyRef Name="FeatureId" />
+    </Key>
+    <Property Name="FeatureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FetureTitle" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductFeature" Relationship="projectShopDBModel.FK_ProductFeature_Feature" FromRole="Feature" ToRole="ProductFeature" />
+  </EntityType>
+  <EntityType Name="ProductFeature">
+    <Key>
+      <PropertyRef Name="ProductFeatureId" />
+    </Key>
+    <Property Name="ProductFeatureId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="FeatureId" Type="Int32" Nullable="false" />
+    <Property Name="Value" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Feature" Relationship="projectShopDBModel.FK_ProductFeature_Feature" FromRole="ProductFeature" ToRole="Feature" />
+    <NavigationProperty Name="Products" Relationship="projectShopDBModel.FK_ProductFeature_Products" FromRole="ProductFeature" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK_ProductFeature_Feature">
+    <End Type="projectShopDBModel.Feature" Role="Feature" Multiplicity="1" />
+    <End Type="projectShopDBModel.ProductFeature" Role="ProductFeature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Feature">
+        <PropertyRef Name="FeatureId" />
+      </Principal>
+      <Dependent Role="ProductFeature">
+        <PropertyRef Name="FeatureId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductFeature_Products">
+    <End Type="projectShopDBModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="projectShopDBModel.ProductFeature" Role="ProductFeature" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductFeature">
         <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>

@@ -1,0 +1,28 @@
+﻿@model ProjectShopCMS.DAL.Feature
+
+@{
+    ViewBag.Title = "حذف ویژگی";
+}
+
+<h3>آیا از حذف این ویژگی اطمینان دارید؟</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FetureTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FetureTitle)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-danger" /> |
+            @Html.ActionLink("بازگشت به لیست", "Index")
+        </div>
+    }
+</div>
