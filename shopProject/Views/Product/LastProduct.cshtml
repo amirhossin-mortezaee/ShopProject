@@ -1,0 +1,31 @@
+﻿@model IEnumerable<ProjectShopCMS.DAL.Products>
+<!-- START SECTION SHOP -->
+
+<div class="section small_pt pb_70">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="heading_s1 text-center">
+                    <h2> محصولات جدید</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="arrival" role="tabpanel" aria-labelledby="arrival-tab">
+                        <div class="row shop_container">
+                            @foreach (var item in Model)
+                            {
+                                @Html.Partial("_ProductsCard", item)
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END SECTION SHOP -->
