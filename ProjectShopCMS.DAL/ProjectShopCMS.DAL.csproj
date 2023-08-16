@@ -130,6 +130,7 @@
     <Compile Include="ViewModel\LoginVeiwModel.cs" />
     <Compile Include="ViewModel\RecoveryPasswordViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\showProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model1.edmx">

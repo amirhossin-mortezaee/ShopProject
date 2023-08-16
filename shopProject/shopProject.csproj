@@ -10166,6 +10166,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MoreLinq\MoreEnumerable.DistinctBy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\CheckContentImage.cs" />
     <Compile Include="Tools\ExtensionsHelper.cs" />
@@ -11445,6 +11446,7 @@
     <Content Include="Views\Account\RecoveryPassword.cshtml" />
     <Content Include="Views\Product\LastProduct.cshtml" />
     <Content Include="Views\Shared\_ProductsCard.cshtml" />
+    <Content Include="Views\Product\showProductDetails.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

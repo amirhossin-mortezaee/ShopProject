@@ -1,0 +1,309 @@
+﻿@model ProjectShopCMS.DAL.Products
+@{
+    string active = "active";
+    ViewBag.Title = "نمایش محصول";
+}
+
+
+
+@using ProjectShopCMS.DAL.ViewModel
+@using ProjectShopCMS.DAL
+<!-- START SECTION BREADCRUMB -->
+<div class="breadcrumb_section bg_gray page-title-mini">
+    <div class="container">
+        <!-- STRART CONTAINER -->
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="page-title">
+                    <h1>@Model.ProductTitle</h1>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <ol class="breadcrumb justify-content-md-end">
+                    <li class="breadcrumb-item"><a href="/">خانه</a></li>
+                    <li class="breadcrumb-item active">@Model.ProductTitle</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- END CONTAINER-->
+</div>
+<!-- END SECTION BREADCRUMB -->
+<!-- START MAIN CONTENT -->
+<div class="main_content">
+
+    <!-- START SECTION SHOP -->
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 mb-4 mb-md-0">
+                    <div class="product-image">
+                        <div class="product_img_box">
+                            <img id="product_img" src="/Images/ProductsImages/@Model.ImageName" data-zoom-image="/Images/ProductsImages/@Model.ImageName" alt="@Model.ProductTitle" style="width:540px;height:600px" />
+                            <a target="_blank" href="/Images/ProductsImages/@Model.ImageName" class="product_img_zoom" title="Zoom">
+                                <span class="linearicons-zoom-in"></span>
+                            </a>
+                        </div>
+                        @if (Model.ProductGallery.Any())
+                        {
+                            <div id="pr_item_gallery" class="product_gallery_item slick_slider" data-slides-to-show="4" data-slides-to-scroll="1" data-infinite="false">
+                                @foreach (var item in Model.ProductGallery)
+                                {
+                                    <div class="item">
+                                        <a target="_blank" href="/Images/ProductsImages/@item.ImageName" class="product_gallery_item @active" data-image="/Images/ProductsImages/@item.ImageName" data-zoom-image="">
+
+                                            <img src="/Images/ProductsImages/@item.ImageName" alt="@item.GalleryTitle" style="width:100px;height:60px" />
+                                        </a>
+
+                                    </div>
+                                    active = "";
+                                }
+
+
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="pr_detail">
+                        <div class="product_description">
+                            <h4 class="product_title"><a href="#">@Model.ProductTitle</a></h4>
+                            <div class="product_price">
+                                <span class="price"> @Model.Price.ToString("#,0")تومان</span>
+                                @*<del>55000 تومان</del>*@
+                                @*<div class="on_sale">
+                                        <span>٪35 تخفیف</span>
+                                    </div>*@
+                            </div>
+                            <div class="rating_wrap">
+                                <div class="rating">
+                                    <div class="product_rate" style="width:80%"></div>
+                                </div>
+                                <span class="rating_num">(21)</span>
+                            </div>
+                            <div class="pr_desc">
+                                <p>@Model.ShortDiscription</p>
+                            </div>
+                            @if (ViewBag.ProductFeature != null)
+                            {
+                                List<showProductViewModel> list = ViewBag.ProductFeature;
+                                <div class="product_sort_info">
+                                    @foreach (var item in list)
+                                    {
+                                        <ul>
+                                            <li>@item.FeatureTitle : @string.Join(",", item.Values)</li>
+                                        </ul>
+                                    }
+                                </div>
+                            }
+
+
+                            <div class="pr_switch_wrap">
+
+                                <ul style="list-style:none">
+                                    <li></li>
+                                </ul>
+
+
+                            </div>
+
+
+
+
+                        </div>
+                        <hr />
+                        <div class="cart_extra">
+                            <div class="cart-product-quantity">
+                                <div class="quantity">
+                                    <input type="button" value="-" class="minus">
+                                    <input type="text" name="quantity" value="1" title="Qty" class="qty" size="4">
+                                    <input type="button" value="+" class="plus">
+                                </div>
+                            </div>
+                            <div class="cart_btn">
+                                <button class="btn btn-fill-out btn-addtocart" type="button"><i class="icon-basket-loaded"></i> افزودن به سبد خرید</button>
+                                <a class="add_compare" href="#"><i class="icon-shuffle"></i></a>
+                                <a class="add_wishlist" href="#"><i class="icon-heart"></i></a>
+                            </div>
+                        </div>
+                        <hr />
+                        <ul class="product-meta">
+
+                            @if (ViewBag.category != null)
+                            {
+                                List<SelectedProductCateGory> listCategory = ViewBag.category;
+                                <li>
+                                    دسته بندی:
+                                    @foreach (var item in listCategory)
+                                    {
+                                        <a href="#">@item.ProductGrops.GroupTitle</a>
+                                    }
+
+                                </li>
+                            }
+                        <li>
+                            برچسب:
+                            @foreach (var item in Model.ProductTags)
+                            {
+                                <a href="#" rel="tag">@item.Tag</a>
+                            }
+
+
+
+                        </li>
+                        </ul>
+
+                        <div class="product_share">
+                            <span>اشتراک:</span>
+                            <ul class="social_icons">
+                                <li><a href="#"><i class="ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="ion-social-googleplus"></i></a></li>
+                                <li><a href="#"><i class="ion-social-youtube-outline"></i></a></li>
+                                <li><a href="#"><i class="ion-social-instagram-outline"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="large_divider clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="tab-style3">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="Description-tab" data-toggle="tab" href="#Description" role="tab" aria-controls="Description" aria-selected="true">توضیحات</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Additional-info-tab" data-toggle="tab" href="#Additional-info" role="tab" aria-controls="Additional-info" aria-selected="false">اطلاعات اضافی</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="Reviews-tab" data-toggle="tab" href="#Reviews" role="tab" aria-controls="Reviews" aria-selected="false">نظرات (2)</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content shop_info_tab">
+
+                            <div class="tab-pane fade show active" id="Description" role="tabpanel" aria-labelledby="Description-tab">
+
+                                @Html.Raw(Model.TextProduct)
+
+                            </div>
+                            <div class="tab-pane fade" id="Additional-info" role="tabpanel" aria-labelledby="Additional-info-tab">
+                                <table class="table table-bordered">
+
+                                    @if (ViewBag.ProductFeature != null)
+                                    {
+                                        List<showProductViewModel> list = ViewBag.ProductFeature;
+                                        foreach (var item in list)
+                                        {
+                                            <tr>
+                                                <td>@item.FeatureTitle</td>
+                                                <td>@string.Join(",",item.Values)</td>
+                                            </tr>
+                                        }
+                                    }
+
+
+
+
+
+
+
+                                </table>
+                            </div>
+                            <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
+                                <div class="comments">
+                                    <h5 class="product_tab_title">2 نظر برای <span>لباس آبی زنانه</span></h5>
+                                    <ul class="list_none comment_list mt-4">
+                                        <li>
+                                            <div class="comment_img">
+                                                <img src="assets/images/user1.jpg" alt="user1" />
+                                            </div>
+                                            <div class="comment_block">
+                                                <div class="rating_wrap">
+                                                    <div class="rating">
+                                                        <div class="product_rate" style="width:80%"></div>
+                                                    </div>
+                                                </div>
+                                                <p class="customer_meta">
+                                                    <span class="review_author">ستاره جمشیدی</span>
+                                                    <span class="comment-date">5 اسفند 1399</span>
+                                                </p>
+                                                <div class="description">
+                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="comment_img">
+                                                <img src="assets/images/user2.jpg" alt="user2" />
+                                            </div>
+                                            <div class="comment_block">
+                                                <div class="rating_wrap">
+                                                    <div class="rating">
+                                                        <div class="product_rate" style="width:60%"></div>
+                                                    </div>
+                                                </div>
+                                                <p class="customer_meta">
+                                                    <span class="review_author">وحید سعیدی</span>
+                                                    <span class="comment-date">5 اسفند 1399</span>
+                                                </p>
+                                                <div class="description">
+                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="review_form field_form">
+                                    <h5>ارسال نظرات</h5>
+                                    <form class="row mt-3">
+                                        <div class="form-group col-12">
+                                            <div class="star_rating">
+                                                <span data-value="1"><i class="far fa-star"></i></span>
+                                                <span data-value="2"><i class="far fa-star"></i></span>
+                                                <span data-value="3"><i class="far fa-star"></i></span>
+                                                <span data-value="4"><i class="far fa-star"></i></span>
+                                                <span data-value="5"><i class="far fa-star"></i></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-12">
+                                            <textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4"></textarea>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <input required="required" placeholder="نام خود را وارد کنید *" class="form-control" name="name" type="text">
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <input required="required" placeholder="ایمیل خود را وارد کنید *" class="form-control" name="email" type="email">
+                                        </div>
+
+                                        <div class="form-group col-12">
+                                            <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">ارسال نظر</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="small_divider"></div>
+                    <div class="divider"></div>
+                    <div class="medium_divider"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- END SECTION SHOP -->
+
+</div>
+<!-- END MAIN CONTENT -->

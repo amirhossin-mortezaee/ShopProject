@@ -2,7 +2,7 @@
     <div class="col-lg-3 col-md-4 col-6">
         <div class="product">
             <div class="product_img">
-                <a href="shop-product-detail.html">
+                <a href="/showProductDetails/@Model.ProductId">
                     <img style="width:100%;height:150px;" src="~/Images/ProductsImages/MiniProductImage/@Model.ImageName" alt="@Model.ProductTitle">
                 </a>
                 <div class="product_action_box">
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="product_info">
-                <h6 class="product_title"><a href="shop-product-detail.html">@Model.ProductTitle</a></h6>
+                <h6 class="product_title"><a href="/showProductDetails/@Model.ProductId">@Model.ProductTitle</a></h6>
                 <div class="product_price">
                     <span class="price">@Model.Price.ToString("#,0") تومان</span>
                     @*<del>55000 تومان</del>
