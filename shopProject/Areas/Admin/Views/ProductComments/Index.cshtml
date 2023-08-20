@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProjectShopCMS.DAL.ProductComment>
+
+@{
+    ViewBag.Title = "بخش نظر ها";
+}
+
+<p>
+    <a class="btn btn-success" href="@Url.Action("Create")">افزودن نظر</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Products.ProductTitle)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Products.ProductTitle)
+        </td>
+        <td>
+            <a class="btn btn-danger btn-md" onclick="Delete(@item.CommentId)">
+                <i class="fa fa-trash"></i>
+            </a>
+        </td>
+    </tr>
+}
+
+</table>
+
+<script>
+    function Delete(id) {
+        if (confirm("آیا از حذف این نظر اطمینان دارید؟"))
+            $.get("/Admin/ProductComments/Delete/" + id,
+                function () {
+                    location.reload(true)
+                });
+    }
+</script>

@@ -10130,6 +10130,11 @@
     <Content Include="Areas\Admin\Views\Features\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Products\FeatureProduct.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductComments\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductComments\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductComments\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductComments\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductComments\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -10152,6 +10157,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\FeaturesController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCommentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductGropsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />

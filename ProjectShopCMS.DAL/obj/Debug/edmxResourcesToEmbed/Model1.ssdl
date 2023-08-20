@@ -7,6 +7,18 @@
     <Property Name="FeatureId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FetureTitle" Type="nvarchar" MaxLength="350" Nullable="false" />
   </EntityType>
+  <EntityType Name="ProductComment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentId" Type="int" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="350" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="850" Nullable="false" />
+  </EntityType>
   <EntityType Name="ProductFeature">
     <Key>
       <PropertyRef Name="ProductFeatureId" />
@@ -94,6 +106,30 @@
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="CreateDate" Type="datetime" Nullable="false" />
   </EntityType>
+  <Association Name="FK_ProductComment_ProductComment">
+    <End Role="ProductComment" Type="Self.ProductComment" Multiplicity="0..1" />
+    <End Role="ProductComment1" Type="Self.ProductComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductComment">
+        <PropertyRef Name="CommentId" />
+      </Principal>
+      <Dependent Role="ProductComment1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductComment_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ProductComment" Type="Self.ProductComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductComment">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProductFeature_Feature">
     <End Role="Feature" Type="Self.Feature" Multiplicity="1" />
     <End Role="ProductFeature" Type="Self.ProductFeature" Multiplicity="*" />
@@ -192,6 +228,7 @@
   </Association>
   <EntityContainer Name="projectShopDBModelStoreContainer">
     <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductComment" EntityType="Self.ProductComment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductFeature" EntityType="Self.ProductFeature" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductGallery" EntityType="Self.ProductGallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductGrops" EntityType="Self.ProductGrops" Schema="dbo" store:Type="Tables" />
@@ -201,6 +238,14 @@
     <EntitySet Name="SelectedProductCateGory" EntityType="Self.SelectedProductCateGory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ProductComment_ProductComment" Association="Self.FK_ProductComment_ProductComment">
+      <End Role="ProductComment" EntitySet="ProductComment" />
+      <End Role="ProductComment1" EntitySet="ProductComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductComment_Products" Association="Self.FK_ProductComment_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductComment" EntitySet="ProductComment" />
+    </AssociationSet>
     <AssociationSet Name="FK_ProductFeature_Feature" Association="Self.FK_ProductFeature_Feature">
       <End Role="Feature" EntitySet="Feature" />
       <End Role="ProductFeature" EntitySet="ProductFeature" />

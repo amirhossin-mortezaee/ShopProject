@@ -55,6 +55,15 @@
       <End Role="Products" EntitySet="Products" />
       <End Role="ProductFeature" EntitySet="ProductFeature" />
     </AssociationSet>
+    <EntitySet Name="ProductComment" EntityType="projectShopDBModel.ProductComment" />
+    <AssociationSet Name="FK_ProductComment_ProductComment" Association="projectShopDBModel.FK_ProductComment_ProductComment">
+      <End Role="ProductComment" EntitySet="ProductComment" />
+      <End Role="ProductComment1" EntitySet="ProductComment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductComment_Products" Association="projectShopDBModel.FK_ProductComment_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductComment" EntitySet="ProductComment" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Roles">
     <Key>
@@ -139,6 +148,7 @@
     <NavigationProperty Name="ProductTags" Relationship="projectShopDBModel.FK_ProductTags_Products" FromRole="Products" ToRole="ProductTags" />
     <NavigationProperty Name="SelectedProductCateGory" Relationship="projectShopDBModel.FK_SelectedProductCateGory_Products" FromRole="Products" ToRole="SelectedProductCateGory" />
     <NavigationProperty Name="ProductFeature" Relationship="projectShopDBModel.FK_ProductFeature_Products" FromRole="Products" ToRole="ProductFeature" />
+    <NavigationProperty Name="ProductComment" Relationship="projectShopDBModel.FK_ProductComment_Products" FromRole="Products" ToRole="ProductComment" />
   </EntityType>
   <EntityType Name="ProductTags">
     <Key>
@@ -246,6 +256,45 @@
         <PropertyRef Name="ProductId" />
       </Principal>
       <Dependent Role="ProductFeature">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ProductComment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int32" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <Property Name="ProductId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Comment" Type="String" Nullable="false" MaxLength="850" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductComment1" Relationship="projectShopDBModel.FK_ProductComment_ProductComment" FromRole="ProductComment" ToRole="ProductComment1" />
+    <NavigationProperty Name="ProductComment2" Relationship="projectShopDBModel.FK_ProductComment_ProductComment" FromRole="ProductComment1" ToRole="ProductComment" />
+    <NavigationProperty Name="Products" Relationship="projectShopDBModel.FK_ProductComment_Products" FromRole="ProductComment" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK_ProductComment_ProductComment">
+    <End Type="projectShopDBModel.ProductComment" Role="ProductComment" Multiplicity="0..1" />
+    <End Type="projectShopDBModel.ProductComment" Role="ProductComment1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductComment">
+        <PropertyRef Name="CommentId" />
+      </Principal>
+      <Dependent Role="ProductComment1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductComment_Products">
+    <End Type="projectShopDBModel.Products" Role="Products" Multiplicity="1" />
+    <End Type="projectShopDBModel.ProductComment" Role="ProductComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductId" />
+      </Principal>
+      <Dependent Role="ProductComment">
         <PropertyRef Name="ProductId" />
       </Dependent>
     </ReferentialConstraint>
