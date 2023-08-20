@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ProjectShopCMS.DAL.ProductComment>
+
+
+<ul class="list_none comment_list" id="listcomment">
+    @foreach (var item in Model.Where(c => c.ParentId == null))
+    {
+    <li class="comment_info">
+        <div class="d-flex">
+            <div class="comment_user">
+                <img src="~/Images/commentImage.png" alt="@item.Name" style="width:80px;height:80px;">
+            </div>
+            <div class="comment_content">
+                <div class="d-flex">
+                    <div class="meta_data">
+                        <h6><a href="#">@item.Name</a></h6>
+                        <div class="comment-time">@item.CreateDate.ToString("yyyy/mm/dd")</div>
+                    </div>
+                    <div class="ml-auto">
+                        <a onclick="ReplayComment(@item.CommentId)" class="comment-reply"><i class="ion-reply-all"></i>پاسخ</a>
+                    </div>
+                </div>
+                <p>@item.Comment</p>
+            </div>
+        </div>
+        @if (Model.Any(c => c.ParentId == item.CommentId))
+        {
+    <ul class="children">
+        @foreach (var replay in Model.Where(c => c.ParentId == item.CommentId))
+        {
+            <li class="comment_info">
+                <div class="d-flex">
+                    <div class="comment_user">
+                        <img src="~/Images/commentImage.png" alt="@replay.Name" style="width:80px;height:80px;">
+                    </div>
+                    <div class="comment_content">
+                        <div class="d-flex align-items-md-center">
+                            <div class="meta_data">
+                                <h6><a href="#">@replay.Name</a></h6>
+                                <div class="comment-time">@replay.CreateDate.ToString("yyyy/mm/dd")</div>
+                            </div>
+                        </div>
+                        <p>@replay.Comment</p>
+                    </div>
+                </div>
+            </li>
+        }
+
+    </ul>
+
+        }
+    </li>
+            }
+
+
+        </ul>
+

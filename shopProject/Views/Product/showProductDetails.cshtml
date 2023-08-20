@@ -2,6 +2,8 @@
 @{
     string active = "active";
     ViewBag.Title = "نمایش محصول";
+
+    var height_comment = ViewBag.courentcomment * 100;
 }
 
 
@@ -143,16 +145,16 @@
 
                                 </li>
                             }
-                        <li>
-                            برچسب:
-                            @foreach (var item in Model.ProductTags)
-                            {
-                                <a href="#" rel="tag">@item.Tag</a>
-                            }
+                            <li>
+                                برچسب:
+                                @foreach (var item in Model.ProductTags)
+                                {
+                                    <a href="#" rel="tag">@item.Tag</a>
+                                }
 
 
 
-                        </li>
+                            </li>
                         </ul>
 
                         <div class="product_share">
@@ -204,7 +206,7 @@
                                         {
                                             <tr>
                                                 <td>@item.FeatureTitle</td>
-                                                <td>@string.Join(",",item.Values)</td>
+                                                <td>@string.Join(",", item.Values)</td>
                                             </tr>
                                         }
                                     }
@@ -218,76 +220,14 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade" id="Reviews" role="tabpanel" aria-labelledby="Reviews-tab">
-                                <div class="comments">
-                                    <h5 class="product_tab_title">2 نظر برای <span>لباس آبی زنانه</span></h5>
-                                    <ul class="list_none comment_list mt-4">
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="assets/images/user1.jpg" alt="user1" />
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:80%"></div>
-                                                    </div>
-                                                </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">ستاره جمشیدی</span>
-                                                    <span class="comment-date">5 اسفند 1399</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="comment_img">
-                                                <img src="assets/images/user2.jpg" alt="user2" />
-                                            </div>
-                                            <div class="comment_block">
-                                                <div class="rating_wrap">
-                                                    <div class="rating">
-                                                        <div class="product_rate" style="width:60%"></div>
-                                                    </div>
-                                                </div>
-                                                <p class="customer_meta">
-                                                    <span class="review_author">وحید سعیدی</span>
-                                                    <span class="comment-date">5 اسفند 1399</span>
-                                                </p>
-                                                <div class="description">
-                                                    <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است</p>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                <div id="replaycomment">
+                                    <div class="content_title">
+                                        <h5> نظرات</h5>
+                                    </div>
+                                    @Html.Action("showComments")
+                                    @Html.Action("CreateComments")
                                 </div>
-                                <div class="review_form field_form">
-                                    <h5>ارسال نظرات</h5>
-                                    <form class="row mt-3">
-                                        <div class="form-group col-12">
-                                            <div class="star_rating">
-                                                <span data-value="1"><i class="far fa-star"></i></span>
-                                                <span data-value="2"><i class="far fa-star"></i></span>
-                                                <span data-value="3"><i class="far fa-star"></i></span>
-                                                <span data-value="4"><i class="far fa-star"></i></span>
-                                                <span data-value="5"><i class="far fa-star"></i></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-12">
-                                            <textarea required="required" placeholder="نظر شما *" class="form-control" name="message" rows="4"></textarea>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <input required="required" placeholder="نام خود را وارد کنید *" class="form-control" name="name" type="text">
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <input required="required" placeholder="ایمیل خود را وارد کنید *" class="form-control" name="email" type="email">
-                                        </div>
 
-                                        <div class="form-group col-12">
-                                            <button type="submit" class="btn btn-fill-out" name="submit" value="Submit">ارسال نظر</button>
-                                        </div>
-                                    </form>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -307,3 +247,38 @@
 
 </div>
 <!-- END MAIN CONTENT -->
+<script>
+    function successComment() {
+        $("#Name").val("");
+        $("#Email").val("");
+        $("#Comment").val("");
+        $("#ParentId").val("");
+    }
+    function ReplayComment(id) {
+        if (id < 3) {
+            $("#ParentId").val(id);
+            window.scrollBy({
+                top: @height_comment, // could be negative value
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+        else if (id == 1) {
+             $("#ParentId").val(id);
+                window.scrollBy({
+                top: @height_comment+50, // could be negative value
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+        else {
+            $("#ParentId").val(id);
+            window.scrollBy({
+                top: @height_comment - id, // could be negative value
+                left: 0,
+                behavior: 'smooth'
+            });
+        }
+
+    }
+</script>

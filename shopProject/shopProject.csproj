@@ -10052,6 +10052,7 @@
     <Content Include="icheck-bootstrap-master\icheck-bootstrap.css" />
     <Content Include="icheck-bootstrap-master\icheck-bootstrap.min.css" />
     <Content Include="icheck-bootstrap-master\_layouts\default.html" />
+    <Content Include="Images\commentImage.png" />
     <Content Include="Images\ProductsImages\MiniProductImage\no-Product-Image.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -11453,6 +11454,8 @@
     <Content Include="Views\Product\LastProduct.cshtml" />
     <Content Include="Views\Shared\_ProductsCard.cshtml" />
     <Content Include="Views\Product\showProductDetails.cshtml" />
+    <Content Include="Views\Product\showComments.cshtml" />
+    <Content Include="Views\Product\CreateComments.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

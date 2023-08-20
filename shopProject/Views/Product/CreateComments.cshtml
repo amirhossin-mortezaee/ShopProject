@@ -1,0 +1,36 @@
+﻿@model ProjectShopCMS.DAL.ProductComment
+<div class="content_title">
+    <h5>نظر خود را ارسال کنید</h5>
+</div>
+@*<form class="field_form" name="enq" method="post">*@
+@using (Ajax.BeginForm("CreateComments", "Product", FormMethod.Post, new AjaxOptions()
+{
+    OnSuccess = "successComment",
+    UpdateTargetId = "listcomment"
+}))
+{
+    @Html.HiddenFor(x => x.ProductId)
+    @Html.HiddenFor(x => x.ParentId)
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "نام خود را وارد کنید" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-8">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "ایمیل خود را وارد کنید" })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group col-md-12">
+            @Html.TextBoxFor(m => m.Comment, new { @class = "form-control", placeholder = "نظر خود را بیان  کنید" })
+            @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-md-12">
+            <input type="submit" value="پیام خود را ارسال کنید! " class="btn btn-primary " />
+
+        </div>
+    </div>
+
+}
+@*</form>*@

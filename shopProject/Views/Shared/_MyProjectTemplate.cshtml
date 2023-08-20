@@ -129,14 +129,12 @@
                                 <li><a href="compare.html"><i class="ti-control-shuffle"></i><span>مقایسه</span></a></li>
                                 @if (User.Identity.IsAuthenticated)
                                 {
-                                    <li><a href="#"><i></i><span>@User.Identity.Name عزیز خوش آمدید</span></a></li>
-                                    <li><a href="/LogOut"><i class="fa fa-power-off"></i><span>خروج</span></a></li>
-                                 }
-                                else
-                                {
-                                   <li><a href="/Register"><i class="fa fa-user-plus"></i><span>عضویت</span></a></li>
-                                   <li><a href="/Login"><i class="fa fa-user"></i><span>ورود</span></a></li>
-                                }
+                    <li><a href="#"><i></i><span>@User.Identity.Name عزیز خوش آمدید</span></a></li>
+                                    <li><a href="/LogOut"><i class="fa fa-power-off"></i><span>خروج</span></a></li> }
+                                                else
+                                                {
+                                    <li><a href="/Register"><i class="fa fa-user-plus"></i><span>عضویت</span></a></li>
+                                                    <li><a href="/Login"><i class="fa fa-user"></i><span>ورود</span></a></li>}
                             </ul>
                         </div>
                     </div>
@@ -417,11 +415,11 @@
 
     <!-- END SECTION BANNER -->
     <!-- END MAIN CONTENT -->
-<div class="main_content">
-    @RenderSection("LastProduct", false)
-    @RenderBody()
+    <div class="main_content">
+        @RenderSection("LastProduct", false)
+        @RenderBody()
 
-</div>
+    </div>
     <!-- END MAIN CONTENT -->
     <!-- START FOOTER -->
     <footer class="footer_dark">
@@ -556,5 +554,6 @@
     <script src="/Content/js/scripts.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
 </body>
 </html>
