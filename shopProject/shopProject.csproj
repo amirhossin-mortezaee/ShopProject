@@ -10170,6 +10170,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManagementEmailController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -11456,6 +11457,7 @@
     <Content Include="Views\Product\showProductDetails.cshtml" />
     <Content Include="Views\Product\showComments.cshtml" />
     <Content Include="Views\Product\CreateComments.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
