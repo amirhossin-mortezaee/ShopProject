@@ -132,6 +132,7 @@
     <Compile Include="ViewModel\ChangePasswordUser.cs" />
     <Compile Include="ViewModel\ForgetPasswordViewModel.cs" />
     <Compile Include="ViewModel\LoginVeiwModel.cs" />
+    <Compile Include="Model\ShopCartitem.cs" />
     <Compile Include="ViewModel\RecoveryPasswordViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
     <Compile Include="ViewModel\showProductViewModel.cs" />
