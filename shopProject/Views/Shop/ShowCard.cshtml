@@ -2,18 +2,18 @@
 
 @if (Model.Any())
 {
-<ul class="cart_list">
+<ul class="cart_list" id="">
     @foreach (var item in Model)
     {
-        <li>
-            <a href="#" class="item_remove"><i class="ion-close"></i></a>
+        <li id="ShowCartId">
+            <a onclick="Remove(@item.ProductId, 0)" class="item_remove"><i class="ion-close"></i></a>
             <a href="#"><img src="~/Images/ProductsImages/MiniProductImage/@item.ImageName" style="width:80px;height:80px;" alt="@item.Title">@item.Title</a>
             <span class="cart_quantity">@item.Count عدد</span>
         </li>
     }
 </ul>
     <div class="cart_footer">
-        <p class="cart_total"><strong>جمع :</strong>159000 <span class="cart_price"> <span class="price_symbole">تومان</span></span></p>
-        <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">سبد خرید</a><a href="#" class="btn btn-fill-out checkout">بررسی</a></p>
+        <p class="cart_total"><strong>جمع :</strong> @Model.Sum(p => p.sum).ToString("#,0")<span class="cart_price"> <span class="price_symbole">تومان</span></span></p>
+        <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">سبد خرید</a><a href="/shop/index" class="btn btn-fill-out checkout">بررسی</a></p>
     </div>
 }

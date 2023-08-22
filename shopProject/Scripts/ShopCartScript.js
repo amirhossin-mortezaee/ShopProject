@@ -18,3 +18,19 @@ function AddToCart(id) {
 function UpdateShopCart() {
     $("#ShowCartId").load("/Shop/ShowCard");
 };
+
+function Remove(id, count) {
+    $.ajax({
+        url: "/Shop/removeProduct/" + id,
+        type: "Get",
+        data: { count: count }
+    }).done(function (result) {
+        CountShopCart();
+        UpdateShopCart1();
+    });
+    
+}
+
+function UpdateShopCart1() {
+    $("#ShowCartId").load("/Shop/ShowCard");
+};

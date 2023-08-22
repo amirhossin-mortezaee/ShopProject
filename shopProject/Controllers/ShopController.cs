@@ -24,7 +24,8 @@ namespace shopProject.Controllers
                     var Product = db.Products.Where(p => p.ProductId == item.ProductId).Select(p => new 
                     { 
                         p.ImageName,
-                        p.ProductTitle
+                        p.ProductTitle,
+                        p.Price
                     }).SingleOrDefault();
 
                     list.Add(new ShopCardItemViewModel()
@@ -32,11 +33,104 @@ namespace shopProject.Controllers
                         Count = item.Count,
                         ImageName = Product.ImageName,
                         ProductId = item.ProductId,
-                        Title = Product.ProductTitle
+                        Title = Product.ProductTitle,
+                        sum = item.Count * Product.Price
                     });
                 }
             }
             return PartialView(list);
+        }
+        List<ShopCardItemViewModel> getremoveproduct()
+        {
+            List<ShopCardItemViewModel> list = new List<ShopCardItemViewModel>();
+            if (Session["ShopCart"] != null)
+            {
+                List<ShopCartitem> listShop = (List<ShopCartitem>)Session["ShopCart"];
+                foreach (var item in listShop)
+                {
+                    var Product = db.Products.Where(p => p.ProductId == item.ProductId).Select(p => new
+                    {
+                        p.ImageName,
+                        p.ProductTitle,
+                        p.Price
+                    }).SingleOrDefault();
+
+                    list.Add(new ShopCardItemViewModel()
+                    {
+                        Count = item.Count,
+                        ImageName = Product.ImageName,
+                        ProductId = item.ProductId,
+                        Title = Product.ProductTitle,
+                        sum = item.Count * Product.Price
+                    });
+                }
+            }
+            return list;
+        }
+        public ActionResult removeProduct(int id, int count)
+        {
+            List<ShopCartitem> listShop = (List<ShopCartitem>)Session["ShopCart"];
+            int index = listShop.FindIndex(p => p.ProductId == id);
+            if (count == 0)
+            {
+                listShop.RemoveAt(index);
+            }
+            Session["ShopCart"] = listShop;
+            return PartialView("ShowCard", getremoveproduct());
+        }
+        public ActionResult index()
+        {
+            return View();
+        }
+
+        List<ShowOrderDetailViewModel> getListOrderDetail()
+        {
+            List<ShowOrderDetailViewModel> list = new List<ShowOrderDetailViewModel>();
+            if (Session["ShopCart"] != null)
+            {
+                List<ShopCartitem> listShop = (List<ShopCartitem>)Session["ShopCart"];
+                foreach (var item in listShop)
+                {
+                    var Product = db.Products.Where(p => p.ProductId == item.ProductId).Select(p => new
+                    {
+                        p.ImageName,
+                        p.ProductTitle,
+                        p.Price
+                    }).SingleOrDefault();
+
+                    list.Add(new ShowOrderDetailViewModel()
+                    {
+                        Count = item.Count,
+                        ImageName = Product.ImageName,
+                        ProductId = item.ProductId,
+                        Title = Product.ProductTitle,
+                        Price = Product.Price,
+                        sum = item.Count * Product.Price
+                    });
+                }
+            }
+            return list;
+        }
+
+        public ActionResult OrderDetail()
+        {
+            return PartialView(getListOrderDetail());
+        }
+
+        public ActionResult AddOrRemoveItemFromOrderList(int id,int count)
+        {
+            List<ShopCartitem> listShop = (List<ShopCartitem>)Session["ShopCart"];
+            int index = listShop.FindIndex(p => p.ProductId == id);
+            if (count == 0)
+            {
+                listShop.RemoveAt(index);
+            }
+            else
+            {
+                listShop[index].Count = count;
+            }
+            Session["ShopCart"] = listShop;
+            return PartialView("OrderDetail", getListOrderDetail());
         }
     }
 }

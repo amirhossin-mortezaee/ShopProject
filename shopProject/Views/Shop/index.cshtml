@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "مشاهده سبد خرید";
+}
+
+<div id="showOrderDetails">
+    @Html.Action("OrderDetail","Shop")
+</div>
+
+<script>
+    function AddOrRemoveItemFromOrderList(id, count) {
+        $.ajax({
+            url: "/Shop/AddOrRemoveItemFromOrderList/" + id,
+            type: "Get",
+            data: { count: count }
+        }).done(function (result) {
+            $("#showOrderDetails").html(result);
+        });
+    }
+</script>

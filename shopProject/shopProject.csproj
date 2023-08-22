@@ -11462,6 +11462,8 @@
     <Content Include="Views\Product\CreateComments.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shop\ShowCard.cshtml" />
+    <Content Include="Views\Shop\index.cshtml" />
+    <Content Include="Views\Shop\OrderDetail.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
