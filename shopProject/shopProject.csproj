@@ -10173,6 +10173,7 @@
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\ShopCartController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -11460,6 +11461,7 @@
     <Content Include="Views\Product\showComments.cshtml" />
     <Content Include="Views\Product\CreateComments.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Shop\ShowCard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

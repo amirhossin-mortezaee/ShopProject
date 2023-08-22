@@ -385,23 +385,8 @@
                         </li>
                         <li class="dropdown cart_dropdown">
                             <a class="nav-link cart_trigger" href="#" data-toggle="dropdown"><i class="linearicons-cart"></i><span id="CountShopCartItems" class="cart_count"></span></a>
-                            <div class="cart_box dropdown-menu dropdown-menu-right">
-                                <ul class="cart_list">
-                                    <li>
-                                        <a href="#" class="item_remove"><i class="ion-close"></i></a>
-                                        <a href="#"><img src="/Content/images/cart_thamb1.jpg" alt="cart_thumb1">تی شرت و پولوشرت</a>
-                                        <span class="cart_quantity"> 1عدد   78000<span class="cart_amount"> <span class="price_symbole">تومان</span></span></span>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="item_remove"><i class="ion-close"></i></a>
-                                        <a href="#"><img src="/Content/images/cart_thamb2.jpg" alt="cart_thumb2">شلوار و سرهمی</a>
-                                        <span class="cart_quantity"> 1عدد  81000<span class="cart_amount"> <span class="price_symbole">تومان</span></span></span>
-                                    </li>
-                                </ul>
-                                <div class="cart_footer">
-                                    <p class="cart_total"><strong>جمع :</strong>159000 <span class="cart_price"> <span class="price_symbole">تومان</span></span></p>
-                                    <p class="cart_buttons"><a href="#" class="btn btn-fill-line view-cart">سبد خرید</a><a href="#" class="btn btn-fill-out checkout">بررسی</a></p>
-                                </div>
+                            <div class="cart_box dropdown-menu dropdown-menu-right" id="ShowCartId">
+                                @Html.Action("ShowCard","Shop")
                             </div>
                         </li>
                     </ul>

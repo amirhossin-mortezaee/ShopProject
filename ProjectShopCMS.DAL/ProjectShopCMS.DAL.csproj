@@ -135,6 +135,7 @@
     <Compile Include="Model\ShopCartitem.cs" />
     <Compile Include="ViewModel\RecoveryPasswordViewModel.cs" />
     <Compile Include="ViewModel\RegisterViewModel.cs" />
+    <Compile Include="ViewModel\ShopCardItemViewModel.cs" />
     <Compile Include="ViewModel\showProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
